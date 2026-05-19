@@ -36,10 +36,45 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   body {
     font-family: 'Noto Serif JP', serif;
     color: var(--ink);
-    background: var(--offwhite);
+    background: #EAEDE5;
     line-height: 1.9;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* スクロールフェードイン */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+  }
+  .fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* リスト系は順番に表示 */
+  .fade-in-stagger > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .fade-in-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+  .fade-in-stagger.is-visible > *:nth-child(2) { transition-delay: 0.15s; }
+  .fade-in-stagger.is-visible > *:nth-child(3) { transition-delay: 0.25s; }
+  .fade-in-stagger.is-visible > *:nth-child(4) { transition-delay: 0.35s; }
+  .fade-in-stagger.is-visible > *:nth-child(5) { transition-delay: 0.45s; }
+  .fade-in-stagger.is-visible > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* アクセシビリティ：動きを減らす設定の人向け */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in, .fade-in-stagger > * {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
   }
 
   .wrap {
@@ -710,11 +745,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <!-- ========== 共感ブロック ========== -->
-  <section class="empathy">
+  <section class="empathy fade-in">
     <span class="section-label">For You</span>
     <h2 class="section-title">こんな気持ち、<br>ありませんか？</h2>
 
-    <ul class="checklist">
+    <ul class="checklist fade-in-stagger">
       <li>薬膳を学んだのに、結局何にも活かせていない</li>
       <li>資格を取ったときは「いつか仕事にしたい」と思っていたのに、そのまま時間だけが過ぎている</li>
       <li>薬膳を教えたり発信したりしたいけれど、何から始めたらいいかわからない</li>
@@ -729,7 +764,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- ========== チャンス提示 ========== -->
-  <section class="chance">
+  <section class="chance fade-in">
     <span class="section-label">Now is the Time</span>
     <h2 class="section-title">今、薬膳を仕事にするなら<br>とても追い風が吹いています</h2>
 
@@ -747,7 +782,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- ========== まいにち薬膳とは ========== -->
-  <section class="about">
+  <section class="about fade-in">
     <span class="section-label">About</span>
     <h2 class="section-title">「まいにち薬膳®」とは？</h2>
 
@@ -769,11 +804,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- ========== 選ばれる3つの理由 ========== -->
-  <section class="reasons">
+  <section class="reasons fade-in">
     <span class="section-label">3 Reasons</span>
     <h2 class="section-title">まいにち薬膳が<br>選ばれる3つの理由</h2>
 
-    <div class="reason-card">
+    <div class="reason-card fade-in">
       <div class="reason-num">01</div>
       <h3 class="reason-title">大人気講師・増子友紀子監修だから、<br>初心者でも形にしやすい</h3>
       <div class="reason-body">
@@ -783,7 +818,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <div class="reason-card">
+    <div class="reason-card fade-in">
       <div class="reason-num">02</div>
       <h3 class="reason-title">最短3カ月で、<br>仕事のスタートを目指せる</h3>
       <div class="reason-body">
@@ -793,7 +828,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <div class="reason-card">
+    <div class="reason-card fade-in">
       <div class="reason-num">03</div>
       <h3 class="reason-title">今ある資格・経験・仕事に<br>"薬膳"をプラスできる</h3>
       <div class="reason-body">
@@ -809,11 +844,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- ========== 受講生の活躍 ========== -->
-  <section class="voices">
+  <section class="voices fade-in">
     <span class="section-label">Voices</span>
     <h2 class="section-title">大人気のまいにち薬膳®だから<br>受講生もこんなに活躍しています</h2>
 
-    <div class="voice-card">
+    <div class="voice-card fade-in">
       <div class="voice-header">
         <div class="voice-photo"><img src="voice_maiko.jpg" alt="まいこさん"></div>
         <div class="voice-meta">
@@ -829,7 +864,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <div class="voice-card">
+    <div class="voice-card fade-in">
       <div class="voice-header">
         <div class="voice-photo"><img src="voice_akane.jpg" alt="あかねさん"></div>
         <div class="voice-meta">
@@ -845,7 +880,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <div class="voice-card">
+    <div class="voice-card fade-in">
       <div class="voice-header">
         <div class="voice-photo"><img src="voice_hiroko.jpg" alt="ひろこさん"></div>
         <div class="voice-meta">
@@ -854,14 +889,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="voice-text">
-        <p>自分自身の不調を整えたいという思いから、薬膳を学び始めました。日常の中で「身体を見ながら整える」感覚を掴めるようになった頃、職場から「教えてほしい」と声をかけられたのが伝えるきっかけでした。</p>
-        <p>実際にお茶会を開いてみると、「また参加したい」と反響をいただき、すでに追加開催も決まっています。</p>
+        <p>自分自身の不調を整えたいという思いから、薬膳を学び始めました。日常の中で「身体を見ながら整える」感覚を掴めるようになった頃、友人から「教えてほしい」と声をかけられたのが伝えるきっかけでした。</p>
+        <p>実際にお茶会を開いてみると、「私も参加したい」と反響をいただき、すでに追加開催も決まっています。</p>
         <p>サロンの施術者として働いていますが、お客様へお話しする際も、お一人おひとりの体調に合わせた提案ができるようになり、より信頼関係が深まっているのを実感しています。薬膳を学んだことで、今までの経験や好きなことが自然とつながり、将来はカフェ経営をしてみたいという未来のイメージも広がりました。</p>
         <p>無理に大きく始めるのではなく、自分の好きや得意を活かしながら、ご縁の中で少しずつ形にしていける。そんな働き方の広がりを感じています。</p>
       </div>
     </div>
 
-    <div class="voice-card">
+    <div class="voice-card fade-in">
       <div class="voice-header">
         <div class="voice-photo"><img src="voice_harumi.jpg" alt="はるみさん"></div>
         <div class="voice-meta">
@@ -879,7 +914,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- ========== こんな未来を目指せます ========== -->
-  <section class="future">
+  <section class="future fade-in">
     <span class="section-label">Your Future</span>
     <h2 class="section-title">こんな未来を、<br>目指せます</h2>
 
@@ -887,7 +922,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <img src="tea3.jpg" alt="お茶を注ぐ">
     </div>
 
-    <ul class="future-list">
+    <ul class="future-list fade-in-stagger">
       <li>薬膳の知識を、ただの"資格"で終わらせず、自分のサービスとして届けられる</li>
       <li>「薬膳を仕事にしたい」という思いを、具体的な行動に変えられる</li>
       <li>自分の言葉で薬膳を伝え、誰かの役に立てる喜びを感じられる</li>
@@ -897,7 +932,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- ========== 無料セミナーでお伝えする内容 ========== -->
-  <section class="seminar">
+  <section class="seminar fade-in">
     <span class="section-label">Free Seminar</span>
     <h2 class="section-title">無料セミナーで<br>お伝えする内容</h2>
 
@@ -905,17 +940,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <img src="book.jpg" alt="まいにち薬膳のテキスト">
     </div>
 
-    <div class="seminar-item">
+    <div class="seminar-item fade-in">
       <div class="seminar-num">01</div>
       <p class="seminar-text">まいにち薬膳なら<br>初心者さんでもお仕事にできる理由</p>
     </div>
 
-    <div class="seminar-item">
+    <div class="seminar-item fade-in">
       <div class="seminar-num">02</div>
       <p class="seminar-text">学んだ薬膳を<br>無理なく仕事に変えていく黄金ステップ<br>＆実際の収入イメージ</p>
     </div>
 
-    <div class="seminar-item">
+    <div class="seminar-item fade-in">
       <div class="seminar-num">03</div>
       <p class="seminar-text">今の資格や仕事に<br>まいにち薬膳をかけあわせて<br>オリジナルのビジネスを始める方法</p>
     </div>
@@ -936,7 +971,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- ========== 特典 ========== -->
-  <section class="bonus">
+  <section class="bonus fade-in">
     <div class="bonus-ribbon">SPECIAL GIFT</div>
     <h2 class="bonus-title">
       <em>今だけの特典</em>
@@ -951,7 +986,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <ul class="bonus-list">
+    <ul class="bonus-list fade-in-stagger">
       <li class="bonus-list-item">
         <div class="bonus-list-num">01</div>
         <div class="bonus-list-stage">動画セミナー視聴後</div>
@@ -975,7 +1010,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- ========== 講師紹介 ========== -->
-  <section class="profile">
+  <section class="profile fade-in">
     <span class="section-label">Profile</span>
     <h2 class="section-title">講師紹介</h2>
 
@@ -1045,7 +1080,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- ========== 最終CTA ========== -->
-  <section class="final-cta" id="cta-final">
+  <section class="final-cta fade-in" id="cta-final">
     <span class="section-label">Join Us</span>
     <p class="final-cta-headline">
       薬膳を仕事にする<br>
@@ -1075,7 +1110,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var fvBottom = fv.getBoundingClientRect().bottom;
       var finalTop = finalCta.getBoundingClientRect().top;
       var winH = window.innerHeight;
-      // FVを過ぎ、かつ最終CTAがまだ画面下に来ていない時に表示
       if (fvBottom < 100 && finalTop > winH - 100) {
         stickyCta.classList.add('is-visible');
       } else {
@@ -1086,6 +1120,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     window.addEventListener('scroll', updateSticky, { passive: true });
     window.addEventListener('resize', updateSticky);
     updateSticky();
+  })();
+
+  // スクロールフェードイン（Intersection Observer）
+  (function() {
+    var targets = document.querySelectorAll('.fade-in, .fade-in-stagger');
+    if (!targets.length || !('IntersectionObserver' in window)) {
+      // フォールバック：全部表示
+      targets.forEach(function(el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    targets.forEach(function(el) { observer.observe(el); });
   })();
 </script>
 

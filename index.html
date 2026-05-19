@@ -42,22 +42,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     -webkit-font-smoothing: antialiased;
   }
 
-  /* スクロールフェードイン */
+  /* スクロールアニメーション */
+  /* ① セクション全体：ズームイン（拡大しながら現れる） */
   .fade-in {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: scale(0.92);
+    transition: opacity 0.9s ease-out, transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
     will-change: opacity, transform;
   }
   .fade-in.is-visible {
     opacity: 1;
+    transform: scale(1);
+  }
+  /* ② カード・項目系：下から大きめにスライドイン */
+  .slide-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .slide-up.is-visible {
+    opacity: 1;
     transform: translateY(0);
   }
-  /* リスト系は順番に表示 */
+  /* リスト系：順番にスライドアップ */
   .fade-in-stagger > * {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
   .fade-in-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
   .fade-in-stagger.is-visible > *:nth-child(2) { transition-delay: 0.15s; }
@@ -68,12 +80,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     opacity: 1;
     transform: translateY(0);
   }
+  /* ③ タイトル下線がスッと伸びる */
+  .section-title::after {
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s;
+  }
+  .fade-in.is-visible .section-title::after,
+  .is-visible.section-title::after {
+    transform: scaleX(1);
+  }
   /* アクセシビリティ：動きを減らす設定の人向け */
   @media (prefers-reduced-motion: reduce) {
-    .fade-in, .fade-in-stagger > * {
-      opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
+    .fade-in, .slide-up, .fade-in-stagger > * {
+      transition-duration: 0.3s !important;
+    }
+    .fade-in-stagger.is-visible > * {
+      transition-delay: 0s !important;
     }
   }
 
@@ -808,7 +831,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="section-label">3 Reasons</span>
     <h2 class="section-title">まいにち薬膳が<br>選ばれる3つの理由</h2>
 
-    <div class="reason-card fade-in">
+    <div class="reason-card slide-up">
       <div class="reason-num">01</div>
       <h3 class="reason-title">大人気講師・増子友紀子監修だから、<br>初心者でも形にしやすい</h3>
       <div class="reason-body">
@@ -818,7 +841,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <div class="reason-card fade-in">
+    <div class="reason-card slide-up">
       <div class="reason-num">02</div>
       <h3 class="reason-title">最短3カ月で、<br>仕事のスタートを目指せる</h3>
       <div class="reason-body">
@@ -828,7 +851,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <div class="reason-card fade-in">
+    <div class="reason-card slide-up">
       <div class="reason-num">03</div>
       <h3 class="reason-title">今ある資格・経験・仕事に<br>"薬膳"をプラスできる</h3>
       <div class="reason-body">
@@ -848,7 +871,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="section-label">Voices</span>
     <h2 class="section-title">大人気のまいにち薬膳®だから<br>受講生もこんなに活躍しています</h2>
 
-    <div class="voice-card fade-in">
+    <div class="voice-card slide-up">
       <div class="voice-header">
         <div class="voice-photo"><img src="voice_maiko.jpg" alt="まいこさん"></div>
         <div class="voice-meta">
@@ -864,7 +887,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <div class="voice-card fade-in">
+    <div class="voice-card slide-up">
       <div class="voice-header">
         <div class="voice-photo"><img src="voice_akane.jpg" alt="あかねさん"></div>
         <div class="voice-meta">
@@ -880,7 +903,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <div class="voice-card fade-in">
+    <div class="voice-card slide-up">
       <div class="voice-header">
         <div class="voice-photo"><img src="voice_hiroko.jpg" alt="ひろこさん"></div>
         <div class="voice-meta">
@@ -896,7 +919,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <div class="voice-card fade-in">
+    <div class="voice-card slide-up">
       <div class="voice-header">
         <div class="voice-photo"><img src="voice_harumi.jpg" alt="はるみさん"></div>
         <div class="voice-meta">
@@ -940,17 +963,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <img src="book.jpg" alt="まいにち薬膳のテキスト">
     </div>
 
-    <div class="seminar-item fade-in">
+    <div class="seminar-item slide-up">
       <div class="seminar-num">01</div>
       <p class="seminar-text">まいにち薬膳なら<br>初心者さんでもお仕事にできる理由</p>
     </div>
 
-    <div class="seminar-item fade-in">
+    <div class="seminar-item slide-up">
       <div class="seminar-num">02</div>
       <p class="seminar-text">学んだ薬膳を<br>無理なく仕事に変えていく黄金ステップ<br>＆実際の収入イメージ</p>
     </div>
 
-    <div class="seminar-item fade-in">
+    <div class="seminar-item slide-up">
       <div class="seminar-num">03</div>
       <p class="seminar-text">今の資格や仕事に<br>まいにち薬膳をかけあわせて<br>オリジナルのビジネスを始める方法</p>
     </div>
@@ -1122,14 +1145,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     updateSticky();
   })();
 
-  // スクロールフェードイン（Intersection Observer）
+  // スクロールフェードイン（Intersection Observer + iOS Safari対応）
   (function() {
-    var targets = document.querySelectorAll('.fade-in, .fade-in-stagger');
-    if (!targets.length || !('IntersectionObserver' in window)) {
-      // フォールバック：全部表示
+    var targets = document.querySelectorAll('.fade-in, .fade-in-stagger, .slide-up');
+    if (!targets.length) return;
+
+    // Intersection Observer非対応ブラウザ向けフォールバック
+    if (!('IntersectionObserver' in window)) {
       targets.forEach(function(el) { el.classList.add('is-visible'); });
       return;
     }
+
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
@@ -1138,10 +1164,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
       });
     }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0,
+      rootMargin: '0px 0px -10% 0px'
     });
-    targets.forEach(function(el) { observer.observe(el); });
+
+    function startObserving() {
+      targets.forEach(function(el) {
+        // 既に画面内にある要素は即座に表示
+        var rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('is-visible');
+        } else {
+          observer.observe(el);
+        }
+      });
+    }
+
+    // iOS Safariで描画タイミングが遅れる問題に対応
+    if (document.readyState === 'complete') {
+      startObserving();
+    } else {
+      window.addEventListener('load', startObserving);
+      // 念のためDOMContentLoadedでも一度
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          setTimeout(startObserving, 100);
+        });
+      } else {
+        setTimeout(startObserving, 100);
+      }
+    }
   })();
 </script>
 
